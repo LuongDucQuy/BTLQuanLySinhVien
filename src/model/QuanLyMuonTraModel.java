@@ -3,11 +3,15 @@ package model;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import view.QuanLyThuVienView;
 
 public class QuanLyMuonTraModel {
 	private ArrayList<MuonTraModel> dsMuonTra;
 	private QuanLySachModel QLSachModel;
 	private SachModel sachModel;
+	private QuanLyThuVienView quanLyThuVienView;
 	
 	public QuanLyMuonTraModel() {
 		this.dsMuonTra = new ArrayList<MuonTraModel>();
@@ -62,22 +66,29 @@ public class QuanLyMuonTraModel {
         return false;
     }
 	public void capNhatSoLuongSach(String maSach, int soLuongMuon) {
-		if (this.sachModel == null) {
-	        JOptionPane.showMessageDialog(null, "sachModel chưa được khởi tạo.", "Thông báo", JOptionPane.ERROR_MESSAGE);
-	        return;
+	    if (this.QLSachModel == null) {
+	        this.QLSachModel = new QuanLySachModel(); // Khởi tạo QLSachModel nếu chưa được khởi tạo
+	        // Bạn cũng có thể xử lý việc khởi tạo QLSachModel ở constructor của QuanLyMuonTraModel để tránh tình trạng này
 	    }
-	    SachModel sach = this.sachModel.timSachTheoMa(maSach);
+	    SachModel sach = this.QLSachModel.timSachTheoMa(maSach);
 	    if (sach != null) {
 	        int soLuongHienTai = sach.getSoLuong();
 	        if (soLuongHienTai >= soLuongMuon) {
 	            sach.setSoLuong(soLuongHienTai - soLuongMuon);
-	            this.sachModel.capNhatSach(sach);
+	            this.QLSachModel.capNhatSach(sach);
+
+	            // Cập nhật dữ liệu lên bảng hiển thị
+	            DefaultTableModel modelTable = (DefaultTableModel) quanLyThuVienView.table.getModel();
+	            for (int i = 0; i < modelTable.getRowCount(); i++) {
+	                if (modelTable.getValueAt(i, 1).equals(maSach)) {
+	                    modelTable.setValueAt(soLuongHienTai - soLuongMuon, i, 5);
+	                    break;
+	                }
+	            }
 	        } else {
 	            JOptionPane.showMessageDialog(null, "Không đủ sách để mượn.", "Thông báo", JOptionPane.ERROR_MESSAGE);
-	            return;
 	        }
-	    } else {
-	        JOptionPane.showMessageDialog(null, "Không tìm thấy sách.", "Thông báo", JOptionPane.ERROR_MESSAGE);
 	    }
 	}
+
 }

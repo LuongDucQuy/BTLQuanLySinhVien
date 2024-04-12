@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class QuanLySachModel {
 	private ArrayList<SachModel> dsSach;
 	private String luaChon;
@@ -56,6 +58,27 @@ public class QuanLySachModel {
         return false;
     }
 	
+	public SachModel timSachTheoMa(String maSach) {
+	    if (this.getDsSach() == null) {
+	        JOptionPane.showMessageDialog(null, "Danh sách sách chưa được khởi tạo.", "Thông báo", JOptionPane.ERROR_MESSAGE);
+	        return null;
+	    }
+	    for (SachModel sach : this.getDsSach()) {
+	        if (sach.getMaSach().equals(maSach)) {
+	            return sach;
+	        }
+	    }
+	    return null;
+	}
+	
+	public void capNhatSach(SachModel sachCapNhat) {
+	    for (int i = 0; i < this.getDsSach().size(); i++) {
+	        if (this.getDsSach().get(i).getMaSach().equals(sachCapNhat.getMaSach())) {
+	            this.getDsSach().set(i, sachCapNhat);
+	            break;
+	        }
+	    }
+	}
 }
 
 

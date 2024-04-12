@@ -18,7 +18,7 @@ public class SachModel {
 	private QuanLySachModel quanLySachModel;
 	
 	public SachModel() {
-		quanLySachModel = new QuanLySachModel();
+		
 	}
 
 	public SachModel(String maSach, String tenSach, String theLoai, String nhaXB, LocalDate namXB, String maTacGia, int soLuong, double giaTien) {
@@ -117,27 +117,5 @@ public class SachModel {
         SachModel sach = (SachModel) obj;
         return Objects.equals(maSach, sach.maSach);
     }
-	
-	public SachModel timSachTheoMa(String maSach) {
-	    if (this.quanLySachModel == null) {
-	        JOptionPane.showMessageDialog(null, "quanLySachModel chưa được khởi tạo.", "Thông báo", JOptionPane.ERROR_MESSAGE);
-	        return null;
-	    }
-	    for (SachModel sach : quanLySachModel.getDsSach()) {
-	        if (sach.getMaSach().equals(maSach)) {
-	            return sach;
-	        }
-	    }
-	    return null;
-	}
-	
-	public void capNhatSach(SachModel sachCapNhat) {
-	    for (int i = 0; i < quanLySachModel.getDsSach().size(); i++) {
-	        if (quanLySachModel.getDsSach().get(i).getMaSach().equals(sachCapNhat.getMaSach())) {
-	            quanLySachModel.getDsSach().set(i, sachCapNhat);
-	            break;
-	        }
-	    }
-	}
 	
 }

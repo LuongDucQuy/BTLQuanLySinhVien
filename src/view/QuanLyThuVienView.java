@@ -69,9 +69,9 @@ public class QuanLyThuVienView extends JFrame {
 	public JTextField textFieldTheLoai;
 	public JTextField textFieldTenSach;
 	public JTextField textFieldMaSach;
-	private JTable table;
+	public JTable table;
 	public JTextField textFieldNgayXuatBan;
-	private JTable table_1;
+	public JTable table_1;
 	public JScrollPane scrollPane_1;
 	/**
 	 * Launch the application.
@@ -814,11 +814,23 @@ public class QuanLyThuVienView extends JFrame {
 	        // Tạo đối tượng MuonTraModel và thêm vào danh sách quản lý mượn trả
 	        MuonTraModel muonTra = new MuonTraModel(maSinhVien, maSach, soLuongMuon, ngayHenTra);
 	        themMuonTra(muonTra);
-	        QLMuonTraModel.capNhatSoLuongSach(maSach, soLuongMuon);
+
+	        // Cập nhật số lượng sách trong danh sách sách
+	        sachMuon.setSoLuong(sachMuon.getSoLuong() - soLuongMuon);
+	        QLSachModel.capNhatSach(sachMuon);
+	        
+	        DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
+	        for (int i = 0; i < modelTable.getRowCount(); i++) {
+	            if (modelTable.getValueAt(i, 1).equals(maSach)) {
+	                modelTable.setValueAt(sachMuon.getSoLuong(), i, 6);
+	                break;
+	            }
+	        }
 	    } else {
 	        JOptionPane.showMessageDialog(this, "Không có sách trong kho để mượn.");
 	    }
 	}
+
 
 	
 	public SachModel getThongTinSach(String maSach) {
@@ -874,6 +886,5 @@ public class QuanLyThuVienView extends JFrame {
 	        JOptionPane.showMessageDialog(this, "Thông tin mượn trả đã được thêm vào.");
 	    }
 	}
-	// Lỗi mượn sách nhưng không trừ đi số lượng sách
 } 
 
