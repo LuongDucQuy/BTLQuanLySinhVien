@@ -31,10 +31,10 @@ public class QuanLyMuonTraController implements Action{
 			this.quanLyThuVienView.thucHienSuaThongTinMuonTra();
 		}
 		else if(cm.equals("Trả Sách")) {
-			
+			this.quanLyThuVienView.thucHienTraSach();
 		}
 		else if(cm.equals("Xóa")) {
-			
+			this.quanLyThuVienView.thucHienXoaThongTinMuonTra();
 		}
 		else if(cm.equals("Làm Mới")) {
 			this.quanLyThuVienView.xoaForm1();

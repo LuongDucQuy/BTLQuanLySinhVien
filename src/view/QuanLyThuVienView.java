@@ -430,11 +430,13 @@ public class QuanLyThuVienView extends JFrame {
 		JButton buttonTraSach = new JButton("Trả Sách");
 		buttonTraSach.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonTraSach.setBounds(571, 10, 106, 45);
+		buttonTraSach.addActionListener(action1);
 		panel_4.add(buttonTraSach);
 		
 		JButton buttonXoaThongTin = new JButton("Xóa");
 		buttonXoaThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonXoaThongTin.setBounds(735, 10, 65, 45);
+		buttonXoaThongTin.addActionListener(action1);
 		panel_4.add(buttonXoaThongTin);
 		
 		JButton buttonLamMoiThongTin = new JButton("Làm Mới");
@@ -1001,20 +1003,23 @@ public class QuanLyThuVienView extends JFrame {
 	        }
 	        QLSachModel.capNhatSach(sachMuon);
 	        
-	        // Cập nhật số lượng sách trong bảng thông tin mượn sách
-	        DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
-	        for (int i = 0; i < modelTable.getRowCount(); i++) {
-	            if (modelTable.getValueAt(i, 1).equals(maSach)) {
-	                modelTable.setValueAt(sachMuon.getSoLuong(), i, 6);
-	                break;
+	        
+	        
+	     // Cập nhật số lượng sách và trạng thái trong bảng thông tin mượn sách
+	        DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+	        int selectedRowIndex = table_1.getSelectedRow();
+	        if (selectedRowIndex != -1) {
+	            modelTable.setValueAt(soLuongMuonMoi, selectedRowIndex, 2);
+	            if (soLuongMuonMoi > 0 && "Đã trả".equals(modelTable.getValueAt(selectedRowIndex, 6))) {
+	                modelTable.setValueAt("Chưa trả", selectedRowIndex, 6);
 	            }
 	        }
-	        
-	        modelTable = (DefaultTableModel) table_1.getModel();
+
+	        // Cập nhật số lượng sách trong bảng quản lý sách
+	        modelTable = (DefaultTableModel) table.getModel();
 	        for (int i = 0; i < modelTable.getRowCount(); i++) {
-	            if (modelTable.getValueAt(i, 1).equals(maSach)) {
-	                modelTable.setValueAt(soLuongMuonMoi, i, 2);
-	                modelTable.setValueAt(ngayHenTraStr, i, 4);
+	            if (modelTable.getValueAt(i, 1).equals(sachMuon.getMaSach())) {
+	                modelTable.setValueAt(sachMuon.getSoLuong(), i, 6); // Giả sử cột 6 là cột số lượng sách
 	                break;
 	            }
 	        }
@@ -1022,5 +1027,67 @@ public class QuanLyThuVienView extends JFrame {
 	        JOptionPane.showMessageDialog(this, "Không có sách trong kho để mượn.");
 	    }
 	}
-} 
+
+	public void thucHienXoaThongTinMuonTra() {
+	    DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+	    int i_row = table_1.getSelectedRow();
+	    if (i_row == -1) {
+	        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa.");
+	        return;
+	    }
+	    MuonTraModel muonTraModel = getThongTinMuonTraDangChon();
+	    if (muonTraModel != null) {
+	        // Kiểm tra trạng thái mượn sách
+	        String trangThai = (String) modelTable.getValueAt(i_row, 6);
+	        if ("Chưa trả".equals(trangThai)) {
+	            JOptionPane.showMessageDialog(this, "Không thể xóa thông tin mượn sách chưa trả.");
+	            return;
+	        }
+	        int luaChon = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn xóa dòng đã chọn?");
+	        if (luaChon == JOptionPane.YES_OPTION) {
+	            this.QLMuonTraModel.delete(muonTraModel);
+	            modelTable.removeRow(i_row);
+	        }
+	    }
+	}
+
+	public void thucHienTraSach() {
+	    // Lấy thông tin mượn trả đang chọn
+	    MuonTraModel muonTraModel = getThongTinMuonTraDangChon();
+	    if (muonTraModel != null) {
+	        // Lấy thông tin sách từ danh sách sách
+	        SachModel sachMuon = QLSachModel.timSachTheoMa(muonTraModel.getMaSach());
+	        if (sachMuon != null) {
+	            // Cập nhật số lượng sách trong quản lý sách
+	            sachMuon.setSoLuong(sachMuon.getSoLuong() + muonTraModel.getSoLuong());
+	            QLSachModel.capNhatSach(sachMuon);
+
+	            // Cập nhật trạng thái mượn trả và số lượng sách trong bảng thông tin mượn sách
+	            DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+	            int selectedRowIndex = table_1.getSelectedRow();
+	            if (selectedRowIndex != -1) {
+	                modelTable.setValueAt("Đã trả", selectedRowIndex, 6);
+	                modelTable.setValueAt(0, selectedRowIndex, 2); // Cập nhật số lượng sách về 0
+	            }
+
+	            // Cập nhật số lượng sách trong bảng quản lý sách
+	            modelTable = (DefaultTableModel) table.getModel();
+	            for (int i = 0; i < modelTable.getRowCount(); i++) {
+	                if (modelTable.getValueAt(i, 1).equals(sachMuon.getMaSach())) {
+	                    modelTable.setValueAt(sachMuon.getSoLuong(), i, 6); // Giả sử cột 6 là cột số lượng sách
+	                    break;
+	                }
+	            }
+
+	            // Xóa thông tin mượn trả khỏi danh sách quản lý mượn trả
+	            QLMuonTraModel.delete(muonTraModel);
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Không tìm thấy sách trong kho.");
+	        }
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Vui lòng chọn thông tin mượn trả cần trả sách.");
+	    }
+	}
+
+}
 
