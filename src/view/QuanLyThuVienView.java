@@ -409,14 +409,6 @@ public class QuanLyThuVienView extends JFrame {
 		textFieldNgayHenTra.setBounds(249, 171, 530, 27);
 		panel_3.add(textFieldNgayHenTra);
 		
-		JButton buttonKiemTraMSV = new JButton("Kiểm Tra");
-		buttonKiemTraMSV.setBounds(830, 26, 117, 27);
-		panel_3.add(buttonKiemTraMSV);
-		
-		JButton buttonKiemTraMaSach = new JButton("Kiểm Tra");
-		buttonKiemTraMaSach.setBounds(830, 73, 117, 27);
-		panel_3.add(buttonKiemTraMaSach);
-		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_4.setBounds(20, 682, 1007, 65);
@@ -425,29 +417,37 @@ public class QuanLyThuVienView extends JFrame {
 		
 		JButton buttonMuonSach = new JButton("Mượn Sách");
 		buttonMuonSach.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonMuonSach.setBounds(93, 10, 121, 45);
+		buttonMuonSach.setBounds(41, 10, 121, 45);
 		buttonMuonSach.addActionListener(action1);
 		panel_4.add(buttonMuonSach);
 		
 		JButton buttonSuaThongTin = new JButton("Sửa Thông Tin");
 		buttonSuaThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonSuaThongTin.setBounds(252, 10, 143, 45);
+		buttonSuaThongTin.setBounds(374, 10, 143, 45);
+		buttonSuaThongTin.addActionListener(action1);
 		panel_4.add(buttonSuaThongTin);
 		
 		JButton buttonTraSach = new JButton("Trả Sách");
 		buttonTraSach.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonTraSach.setBounds(451, 10, 106, 45);
+		buttonTraSach.setBounds(571, 10, 106, 45);
 		panel_4.add(buttonTraSach);
 		
 		JButton buttonXoaThongTin = new JButton("Xóa");
 		buttonXoaThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonXoaThongTin.setBounds(634, 10, 65, 45);
+		buttonXoaThongTin.setBounds(735, 10, 65, 45);
 		panel_4.add(buttonXoaThongTin);
 		
 		JButton buttonLamMoiThongTin = new JButton("Làm Mới");
 		buttonLamMoiThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonLamMoiThongTin.setBounds(789, 10, 106, 45);
+		buttonLamMoiThongTin.setBounds(861, 10, 106, 45);
+		buttonLamMoiThongTin.addActionListener(action1);
 		panel_4.add(buttonLamMoiThongTin);
+		
+		JButton buttonCapNhat = new JButton("Cập Nhật");
+		buttonCapNhat.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		buttonCapNhat.setBounds(201, 12, 129, 45);
+		buttonCapNhat.addActionListener(action1);
+		panel_4.add(buttonCapNhat);
 		
 		JLabel lblChcNng = new JLabel("Chức Năng");
 		lblChcNng.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -483,6 +483,13 @@ public class QuanLyThuVienView extends JFrame {
 		textFieldMaTacGia.setText("");
 		textFieldSoLuong.setText("");
 		textFieldGiaTien.setText("");
+	}
+	
+	public void xoaForm1() {
+		textFieldMaSinhVien.setText("");
+		textFieldMaSach1.setText("");
+		textFieldSoLuong1.setText("");
+		textFieldNgayHenTra.setText("");
 	}
 	
 	public void themThiSinhVaoTable(SachModel sach) {
@@ -852,7 +859,6 @@ public class QuanLyThuVienView extends JFrame {
 	    
 	    for (int i = 0; i < modelTable.getRowCount(); i++) {
 	        if (muonTra.getMaSinhVien().equals(modelTable.getValueAt(i, 0)) && muonTra.getMaSach().equals(modelTable.getValueAt(i, 1))) {
-	            JOptionPane.showMessageDialog(this, "Thông tin mượn trả đã tồn tại.");
 	            daTonTai = true;
 	            break;
 	        }
@@ -878,12 +884,142 @@ public class QuanLyThuVienView extends JFrame {
 	            return;
 	        }
 
-	        modelTable.addRow(new Object[]{muonTra.getMaSinhVien(), muonTra.getMaSach(), muonTra.getSoLuong(), ngayMuon, muonTra.getNgayHenTra().format(formatter), ngayTra, ""});
+	        modelTable.addRow(new Object[]{muonTra.getMaSinhVien(), muonTra.getMaSach(), muonTra.getSoLuong(), ngayMuon, muonTra.getNgayHenTra().format(formatter), ngayTra, "Chưa trả"});
 	        if (!this.QLMuonTraModel.kiemTraTonTai(muonTra)) {
 	            this.QLMuonTraModel.insert(muonTra);
 	        }
 	        this.QLMuonTraModel.capNhatSoLuongSach(muonTra.getMaSach(), muonTra.getSoLuong());
 	        JOptionPane.showMessageDialog(this, "Thông tin mượn trả đã được thêm vào.");
+	    }
+	}
+	
+	public MuonTraModel getThongTinMuonTraDangChon() {
+	    DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+	    int i_row = table_1.getSelectedRow();
+	    String maSinhVien = modelTable.getValueAt(i_row, 0) + "";
+	    String maSach = modelTable.getValueAt(i_row, 1) + "";
+	    int soLuong = Integer.valueOf(modelTable.getValueAt(i_row, 2) + "");
+	    String s_NgayHenTra = modelTable.getValueAt(i_row, 4)+"";
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    LocalDate NgayHenTra = LocalDate.parse(s_NgayHenTra, formatter);
+	    MuonTraModel muonTraModel = new MuonTraModel(maSinhVien, maSach, soLuong, NgayHenTra);
+	    return muonTraModel;
+	}
+	
+	public void capNhatThongTinMuonTra() {
+		try {
+	    	int i_row = table_1.getSelectedRow();
+		    if (i_row == -1) {
+		        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật.");
+		        return;
+		    }
+	        MuonTraModel muonTraModel = getThongTinMuonTraDangChon();
+	        if (muonTraModel == null) {
+	    	        return;
+	        }
+	        
+	        // Hiển thị thông tin sách
+	        this.textFieldMaSinhVien.setText(muonTraModel.getMaSinhVien() + "");
+	        this.textFieldMaSach1.setText(muonTraModel.getMaSach() + "");
+	        int soLuong = muonTraModel.getSoLuong();
+	        if (soLuong >= 0) {
+	            this.textFieldSoLuong1.setText(soLuong + "");
+	        } else {
+	            this.textFieldSoLuong1.setText("Số lượng không hợp lệ");
+	        }
+	        
+	        // Kiểm tra tính hợp lệ của ngày hẹn trả
+	        LocalDate ngayHenTra = muonTraModel.getNgayHenTra();
+	        if (ngayHenTra != null) {
+	            String s_ngayHenTra = ngayHenTra.getDayOfMonth() + "/" + ngayHenTra.getMonthValue() + "/" + ngayHenTra.getYear();
+	            this.textFieldNgayHenTra.setText(s_ngayHenTra);
+	        } else {
+	            this.textFieldNgayHenTra.setText("Ngày không hợp lệ");
+	        }
+	        
+	    } catch (NumberFormatException e) {
+	        JOptionPane.showMessageDialog(this, "Vui lòng kiểm tra lại thông tin.");
+	    }
+	}
+
+	public void thucHienSuaThongTinMuonTra() {
+		int i_row = table_1.getSelectedRow();
+	    if (i_row == -1) {
+	        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần sửa thông tin.");
+	        return;
+	    }
+	    // Kiểm tra nếu danh sách sách không rỗng
+	    if (QLSachModel.getDsSach() != null) {
+	        // Lấy thông tin từ các trường nhập vào
+	        String maSinhVien = this.textFieldMaSinhVien.getText();
+	        String maSach = this.textFieldMaSach1.getText();
+	        int soLuongMuonMoi = 0;
+	        try {
+	            soLuongMuonMoi = Integer.parseInt(this.textFieldSoLuong1.getText());
+	        } catch (NumberFormatException e) {
+	            JOptionPane.showMessageDialog(this, "Số lượng mượn không hợp lệ.");
+	            return;
+	        }
+	        String ngayHenTraStr = this.textFieldNgayHenTra.getText();
+
+	        // Kiểm tra ngày hẹn trả có đúng định dạng không
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	        LocalDate ngayHenTra;
+	        try {
+	            ngayHenTra = LocalDate.parse(ngayHenTraStr, formatter);
+	        } catch (DateTimeParseException e) {
+	            JOptionPane.showMessageDialog(this, "Ngày hẹn trả không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy.");
+	            return;
+	        }
+
+	        // Lấy thông tin sách từ danh sách sách
+	        SachModel sachMuon = QLSachModel.timSachTheoMa(maSach);
+	        if (sachMuon == null) {
+	            JOptionPane.showMessageDialog(this, "Sách không tồn tại trong danh sách.");
+	            return;
+	        }
+
+	        // Lấy thông tin mượn trả hiện tại
+	        MuonTraModel muonTraHienTai = getThongTinMuonTraDangChon();
+	        int soLuongMuonCu = muonTraHienTai.getSoLuong();
+
+	        // Kiểm tra số lượng sách còn trong kho
+	        if (soLuongMuonMoi > soLuongMuonCu + sachMuon.getSoLuong()) {
+	            JOptionPane.showMessageDialog(this, "Số lượng sách mượn vượt quá số lượng tồn trong kho.");
+	            return;
+	        }
+
+	        // Tạo đối tượng MuonTraModel và thêm vào danh sách quản lý mượn trả
+	        MuonTraModel muonTra = new MuonTraModel(maSinhVien, maSach, soLuongMuonMoi, ngayHenTra);
+	        themMuonTra(muonTra);
+
+	        // Cập nhật số lượng sách trong danh sách sách
+	        if (soLuongMuonMoi < soLuongMuonCu) {
+	            sachMuon.setSoLuong(sachMuon.getSoLuong() + soLuongMuonCu - soLuongMuonMoi);
+	        } else if (soLuongMuonMoi > soLuongMuonCu) {
+	            sachMuon.setSoLuong(sachMuon.getSoLuong() - soLuongMuonMoi + soLuongMuonCu);
+	        }
+	        QLSachModel.capNhatSach(sachMuon);
+	        
+	        // Cập nhật số lượng sách trong bảng thông tin mượn sách
+	        DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
+	        for (int i = 0; i < modelTable.getRowCount(); i++) {
+	            if (modelTable.getValueAt(i, 1).equals(maSach)) {
+	                modelTable.setValueAt(sachMuon.getSoLuong(), i, 6);
+	                break;
+	            }
+	        }
+	        
+	        modelTable = (DefaultTableModel) table_1.getModel();
+	        for (int i = 0; i < modelTable.getRowCount(); i++) {
+	            if (modelTable.getValueAt(i, 1).equals(maSach)) {
+	                modelTable.setValueAt(soLuongMuonMoi, i, 2);
+	                modelTable.setValueAt(ngayHenTraStr, i, 4);
+	                break;
+	            }
+	        }
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Không có sách trong kho để mượn.");
 	    }
 	}
 } 

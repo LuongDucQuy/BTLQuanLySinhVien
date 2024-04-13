@@ -24,7 +24,11 @@ public class QuanLyMuonTraController implements Action{
 				e1.printStackTrace();
 			}
 		}
+		else if(cm.equals("Cập Nhật")) {
+			this.quanLyThuVienView.capNhatThongTinMuonTra();
+		}
 		else if(cm.equals("Sửa Thông Tin")) {
+			this.quanLyThuVienView.thucHienSuaThongTinMuonTra();
 		}
 		else if(cm.equals("Trả Sách")) {
 			
@@ -33,7 +37,7 @@ public class QuanLyMuonTraController implements Action{
 			
 		}
 		else if(cm.equals("Làm Mới")) {
-			this.quanLyThuVienView.xoaForm();
+			this.quanLyThuVienView.xoaForm1();
 		}
 	}
 
