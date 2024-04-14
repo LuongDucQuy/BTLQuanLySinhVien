@@ -588,10 +588,11 @@ public class QuanLyThuVienView extends JFrame {
 	        this.textFieldTheLoai.setText(sachModel.getTheLoai() + "");
 	        this.textFieldNhaXuatBan.setText(sachModel.getNhaXB() + "");
 	        
-	        // Kiểm tra tính hợp lệ của ngày xuất bản
+	     // Kiểm tra tính hợp lệ của ngày xuất bản
 	        LocalDate namXB = sachModel.getNamXB();
 	        if (namXB != null) {
-	            String s_ngaySinh = namXB.getDayOfMonth() + "/" + namXB.getMonthValue() + "/" + namXB.getYear();
+	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	            String s_ngaySinh = namXB.format(formatter);
 	            this.textFieldNgayXuatBan.setText(s_ngaySinh);
 	        } else {
 	            this.textFieldNgayXuatBan.setText("Ngày không hợp lệ");
@@ -808,14 +809,14 @@ public class QuanLyThuVienView extends JFrame {
 	        }
 
 	        // Lấy thông tin sách từ danh sách sách
-	        SachModel sachMuon = getThongTinSach(maSach);
-	        if (sachMuon == null) {
+	        SachModel sachModel = getThongTinSach(maSach);
+	        if (sachModel == null) {
 	            JOptionPane.showMessageDialog(this, "Sách không tồn tại trong danh sách.");
 	            return;
 	        }
 
 	        // Kiểm tra số lượng sách còn trong kho
-	        if (soLuongMuon > sachMuon.getSoLuong()) {
+	        if (soLuongMuon > sachModel.getSoLuong()) {
 	            JOptionPane.showMessageDialog(this, "Số lượng sách mượn vượt quá số lượng tồn trong kho.");
 	            return;
 	        }
@@ -825,13 +826,13 @@ public class QuanLyThuVienView extends JFrame {
 	        themMuonTra(muonTra);
 
 	        // Cập nhật số lượng sách trong danh sách sách
-	        sachMuon.setSoLuong(sachMuon.getSoLuong() - soLuongMuon);
-	        QLSachModel.capNhatSach(sachMuon);
+	        sachModel.setSoLuong(sachModel.getSoLuong() - soLuongMuon);
+	        QLSachModel.capNhatSach(sachModel);
 	        
 	        DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
 	        for (int i = 0; i < modelTable.getRowCount(); i++) {
-	            if (modelTable.getValueAt(i, 1).equals(maSach)) {
-	                modelTable.setValueAt(sachMuon.getSoLuong(), i, 6);
+	            if (modelTable.getValueAt(i, 0).equals(maSach)) {
+	                modelTable.setValueAt(sachModel.getSoLuong(), i, 6);
 	                break;
 	            }
 	        }
@@ -933,7 +934,8 @@ public class QuanLyThuVienView extends JFrame {
 	        // Kiểm tra tính hợp lệ của ngày hẹn trả
 	        LocalDate ngayHenTra = muonTraModel.getNgayHenTra();
 	        if (ngayHenTra != null) {
-	            String s_ngayHenTra = ngayHenTra.getDayOfMonth() + "/" + ngayHenTra.getMonthValue() + "/" + ngayHenTra.getYear();
+	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	            String s_ngayHenTra = ngayHenTra.format(formatter);
 	            this.textFieldNgayHenTra.setText(s_ngayHenTra);
 	        } else {
 	            this.textFieldNgayHenTra.setText("Ngày không hợp lệ");
@@ -1018,7 +1020,7 @@ public class QuanLyThuVienView extends JFrame {
 	        // Cập nhật số lượng sách trong bảng quản lý sách
 	        modelTable = (DefaultTableModel) table.getModel();
 	        for (int i = 0; i < modelTable.getRowCount(); i++) {
-	            if (modelTable.getValueAt(i, 1).equals(sachMuon.getMaSach())) {
+	            if (modelTable.getValueAt(i, 0).equals(sachMuon.getMaSach())) {
 	                modelTable.setValueAt(sachMuon.getSoLuong(), i, 6); // Giả sử cột 6 là cột số lượng sách
 	                break;
 	            }
@@ -1073,7 +1075,7 @@ public class QuanLyThuVienView extends JFrame {
 	            // Cập nhật số lượng sách trong bảng quản lý sách
 	            modelTable = (DefaultTableModel) table.getModel();
 	            for (int i = 0; i < modelTable.getRowCount(); i++) {
-	                if (modelTable.getValueAt(i, 1).equals(sachMuon.getMaSach())) {
+	                if (modelTable.getValueAt(i, 0).equals(sachMuon.getMaSach())) {
 	                    modelTable.setValueAt(sachMuon.getSoLuong(), i, 6); // Giả sử cột 6 là cột số lượng sách
 	                    break;
 	                }
@@ -1088,6 +1090,7 @@ public class QuanLyThuVienView extends JFrame {
 	        JOptionPane.showMessageDialog(this, "Vui lòng chọn thông tin mượn trả cần trả sách.");
 	    }
 	}
-
+// lỗi: nhập 1 cập nhật được còn nhập s01 thì không
+// lỗi: sửa thông tin lỗi
 }
 
