@@ -39,6 +39,12 @@ public class QuanLyMuonTraController implements Action{
 		else if(cm.equals("Làm Mới")) {
 			this.quanLyThuVienView.xoaForm1();
 		}
+		else if(cm.equals("Tìm Kiếm")) {
+			this.quanLyThuVienView.thucHienTimKiem();
+		}
+		else if(cm.equals("Hủy Tìm")) {
+			this.quanLyThuVienView.thucHienHuyTim1();
+		}
 	}
 
 	@Override

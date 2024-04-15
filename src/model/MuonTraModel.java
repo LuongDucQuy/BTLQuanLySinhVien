@@ -8,6 +8,7 @@ public class MuonTraModel {
 	private String maSach;
 	private int soLuong;
 	private LocalDate ngayHenTra;
+	private String trangThai;
 	
 	public MuonTraModel() {}
 
@@ -48,6 +49,14 @@ public class MuonTraModel {
 
 	public void setNgayHenTra(LocalDate ngayHenTra) {
 		this.ngayHenTra = ngayHenTra;
+	}
+
+	public String getTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(String trangThai) {
+		this.trangThai = trangThai;
 	}
 
 	@Override

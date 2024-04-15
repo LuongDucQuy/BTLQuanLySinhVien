@@ -15,7 +15,6 @@ public class QuanLyMuonTraModel {
 	
 	public QuanLyMuonTraModel() {
 		this.dsMuonTra = new ArrayList<MuonTraModel>();
-//        this.QLSachModel = new QuanLySachModel();
         sachModel = new SachModel();
 	}
 	
@@ -90,5 +89,15 @@ public class QuanLyMuonTraModel {
 	        }
 	    }
 	}
+
+	public void capNhatMuonTra(MuonTraModel muonTraModel) {
+	    for (MuonTraModel muonTra : dsMuonTra) {
+	        if (muonTra.getMaSach().equals(muonTraModel.getMaSach()) && muonTra.getMaSinhVien().equals(muonTraModel.getMaSinhVien())) {
+	            muonTra.setSoLuong(0);
+	            break;
+	        }
+	    }
+	}
+
 
 }

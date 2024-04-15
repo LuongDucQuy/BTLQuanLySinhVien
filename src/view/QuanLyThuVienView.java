@@ -317,49 +317,44 @@ public class QuanLyThuVienView extends JFrame {
 		tabbedPane_1.addTab("Quản Lý Mượn Trả", null, panel, null);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Tìm Kiếm");
-		lblNewLabel.setBounds(10, 10, 60, 17);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel.add(lblNewLabel);
+		JLabel jlbTimKiemTheoMSV = new JLabel("Tìm Kiếm");
+		jlbTimKiemTheoMSV.setBounds(10, 10, 60, 17);
+		jlbTimKiemTheoMSV.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel.add(jlbTimKiemTheoMSV);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(20, 33, 1007, 141);
+		panel_1.setBounds(20, 33, 1007, 115);
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		ButtonGroup group = new ButtonGroup();
 
-		JRadioButton RadioBtnTimKiemTheoTraSach = new JRadioButton("Theo Phiếu Mượn Trả Sách");
-		RadioBtnTimKiemTheoTraSach.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RadioBtnTimKiemTheoTraSach.setBounds(16, 17, 197, 25);
-		panel_1.add(RadioBtnTimKiemTheoTraSach);
-		group.add(RadioBtnTimKiemTheoTraSach);
-
-		JRadioButton RadioBtnTimKiemTheoMuonSach = new JRadioButton("Theo Mã Sinh Viên Mượn Sách");
-		RadioBtnTimKiemTheoMuonSach.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RadioBtnTimKiemTheoMuonSach.setBounds(17, 57, 219, 25);
-		panel_1.add(RadioBtnTimKiemTheoMuonSach);
-		group.add(RadioBtnTimKiemTheoMuonSach);
-
-		JRadioButton RadioBtnTimiKiemTheoMaSach = new JRadioButton("Theo Mã Sách Được Mượn");
-		RadioBtnTimiKiemTheoMaSach.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RadioBtnTimiKiemTheoMaSach.setBounds(16, 95, 195, 25);
-		panel_1.add(RadioBtnTimiKiemTheoMaSach);
-		group.add(RadioBtnTimiKiemTheoMaSach);
-
 		
 		textFieldTimKiem1 = new JTextField();
-		textFieldTimKiem1.setBounds(253, 57, 521, 25);
+		textFieldTimKiem1.setBounds(253, 39, 521, 25);
 		panel_1.add(textFieldTimKiem1);
 		textFieldTimKiem1.setColumns(10);
 		
 		JButton buttonTimKiem1 = new JButton("Tìm Kiếm");
-		buttonTimKiem1.setBounds(827, 53, 117, 37);
+		buttonTimKiem1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		buttonTimKiem1.setBounds(828, 15, 117, 37);
+		buttonTimKiem1.addActionListener(action1);
 		panel_1.add(buttonTimKiem1);
 		
+		JButton buttonHuyTim1 = new JButton("Hủy Tìm");
+		buttonHuyTim1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		buttonHuyTim1.setBounds(828, 62, 117, 37);
+		buttonHuyTim1.addActionListener(action1);
+		panel_1.add(buttonHuyTim1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Tìm Kiếm Theo Mã Sinh Viên");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_2.setBounds(23, 39, 206, 20);
+		panel_1.add(lblNewLabel_2);
+		
 		JLabel lblNewLabel_1 = new JLabel("Thông Tin Mượn Sách");
-		lblNewLabel_1.setBounds(10, 184, 141, 17);
+		lblNewLabel_1.setBounds(10, 174, 141, 17);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblNewLabel_1);
 		
@@ -510,17 +505,34 @@ public class QuanLyThuVienView extends JFrame {
 	    });
 	}
 	
+	
 	public void themSachVaoTable(MuonTraModel muonTraModel) {
-	    DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
+	    DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+	    LocalDateTime now = LocalDateTime.now();
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    String ngayMuon = now.format(formatter);
+	    String ngayTra = now.plusDays(14).format(formatter);
 	    String strDate = muonTraModel.getNgayHenTra().format(formatter);
+	    
+	    String trangThai;
+	    
+	    if (muonTraModel.getSoLuong() > 0) {
+	        trangThai = "Chưa trả";
+	    } else {
+	        trangThai = "Đã trả";
+	    }
+	    
 	    modelTable.addRow(new Object[]{
-	    		muonTraModel.getMaSinhVien()+"",
-	    		muonTraModel.getMaSach()+"",
-	    		muonTraModel.getSoLuong()+"",
-	            strDate,
+	        muonTraModel.getMaSinhVien()+"",
+	        muonTraModel.getMaSach()+"",
+	        muonTraModel.getSoLuong()+"",
+	        ngayMuon,
+	        strDate,
+	        ngayTra,
+	        trangThai
 	    });
 	}
+
 	
 	public void themHoacCapNhatSach(SachModel sach) {
 	    DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
@@ -1080,9 +1092,10 @@ public class QuanLyThuVienView extends JFrame {
 	                    break;
 	                }
 	            }
+	         // Cập nhật trạng thái mượn trả
+	            muonTraModel.setTrangThai("Đã trả");
+	            QLMuonTraModel.capNhatMuonTra(muonTraModel);
 
-	            // Xóa thông tin mượn trả khỏi danh sách quản lý mượn trả
-	            QLMuonTraModel.delete(muonTraModel);
 	        } else {
 	            JOptionPane.showMessageDialog(this, "Không tìm thấy sách trong kho.");
 	        }
@@ -1090,7 +1103,77 @@ public class QuanLyThuVienView extends JFrame {
 	        JOptionPane.showMessageDialog(this, "Vui lòng chọn thông tin mượn trả cần trả sách.");
 	    }
 	}
-// lỗi: nhập 1 cập nhật được còn nhập s01 thì không
-// lỗi: sửa thông tin lỗi
+
+	public void thucHienTaiLaiDuLieu1() {
+		while (true) {
+			DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+			int soLuongDong = modelTable.getRowCount();
+			if(soLuongDong==0)
+				break;
+			else
+				try {
+					modelTable.removeRow(0);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
+		for (MuonTraModel muonTraModel : this.QLMuonTraModel.getDsMuonTra()) {
+			this.themSachVaoTable(muonTraModel);
+		}
+	} 
+
+	public void thucHienTimKiem() {
+		// Goi ham huy tim kiem
+	    this.thucHienTaiLaiDuLieu1();
+	    
+	    // Thuc hien tim kiem
+	    String maSinhVienTimKiem = this.textFieldTimKiem1.getText();
+	    DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+	    int soLuongDong = modelTable.getRowCount();
+
+	    Set<String> idCuaSinhVienCanXoa = new TreeSet<String>();
+	    if (maSinhVienTimKiem.length() > 0) {
+	        for (int i = 0; i < soLuongDong; i++) {
+	            String id = modelTable.getValueAt(i, 0) + "";
+	            if (!id.equals(maSinhVienTimKiem)) {
+	            	idCuaSinhVienCanXoa.add(id);
+	            }
+	        }
+	    }
+	    for (String idCanXoa : idCuaSinhVienCanXoa) {
+	        soLuongDong = modelTable.getRowCount();
+	        for (int i = 0; i < soLuongDong; i++) {
+	            String idTrongTable = modelTable.getValueAt(i, 0) + "";
+	            if (idTrongTable.equals(idCanXoa)) {
+	                try {
+	                    modelTable.removeRow(i);
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                }
+	                break;
+	            }
+	        }
+	    }
+	}
+	
+	public void thucHienHuyTim1() {
+		while(true) {
+			DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+			int soLuongDong = modelTable.getRowCount();
+			if(soLuongDong==0) {
+				break;
+			}
+			else {
+				try {
+					modelTable.removeRow(0);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		for(MuonTraModel muonTraModel : this.QLMuonTraModel.getDsMuonTra()) {
+			this.themSachVaoTable(muonTraModel);
+		}
+	}
 }
 
