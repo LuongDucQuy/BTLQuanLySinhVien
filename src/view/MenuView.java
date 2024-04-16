@@ -69,7 +69,6 @@ public class MenuView extends JFrame {
         setJMenuBar(menuBar);
         
         Action action = new MenuController(this);
-//        ActionListener menuController = new MenuController(this);
         
         menuSelect = new JMenu("Select");
         menuSelect.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\menuSelect.png"));

@@ -166,13 +166,13 @@ public class LoginView extends JFrame {
         } else {
             try {
                 // Kết nối tới cơ sở dữ liệu
-                String url = "jdbc:mysql://localhost:3306/ontap";
+                String url = "jdbc:mysql://localhost:3306/databasebtl";
                 String user = "root";
                 String pass = "";
                 Connection conn = DriverManager.getConnection(url, user, pass);
                 
                 // Tạo truy vấn SQL
-                String query = "SELECT * FROM persons WHERE user = ? AND pass = ?"; // Thay đổi your_table_name thành tên bảng chứa thông tin đăng nhập
+                String query = "SELECT * FROM admin WHERE user = ? AND pass = ?"; // Thay đổi your_table_name thành tên bảng chứa thông tin đăng nhập
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setString(1, username);
                 statement.setString(2, password);

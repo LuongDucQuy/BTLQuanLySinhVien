@@ -39,6 +39,8 @@ import model.SachModel;
 import javax.swing.JTabbedPane;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+
 import java.awt.FlowLayout;
 import java.awt.Component;
 import javax.swing.Box;
@@ -73,6 +75,7 @@ public class QuanLyThuVienView extends JFrame {
 	public JTextField textFieldNgayXuatBan;
 	public JTable table_1;
 	public JScrollPane scrollPane_1;
+	ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("iconMain.jpg"));
 	/**
 	 * Launch the application.
 	 */
@@ -97,24 +100,28 @@ public class QuanLyThuVienView extends JFrame {
 		this.QLMuonTraModel = new QuanLyMuonTraModel();
 		this.muonTraModel = new MuonTraModel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1085, 841);
+		setBounds(100, 100, 1085, 832);
 		
 		Action action = new QuanLySachController(this);
 		Action action1 = new QuanLyMuonTraController(this);
+		this.setIconImage(logo.getImage());
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
 		JMenu jMenuHeThong = new JMenu("Hệ Thống");
 		menuBar.add(jMenuHeThong);
+		jMenuHeThong.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\menuSelect.png"));
 		jMenuHeThong.addActionListener(action);
 		
 		JMenuItem jMenuDong = new JMenuItem("Đóng");
 		jMenuHeThong.add(jMenuDong);
+		jMenuDong.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\menuLogOut.png"));
 		jMenuDong.addActionListener(action);
 		
 		JMenuItem jMenuThoat = new JMenuItem("Thoát");
 		jMenuHeThong.add(jMenuThoat);
+		jMenuThoat.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\menuExit.png"));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		jMenuThoat.addActionListener(action);
@@ -131,7 +138,7 @@ public class QuanLyThuVienView extends JFrame {
 		jPanleQuanLySach.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane((Component) null);
-		scrollPane.setBounds(10, 380, 1012, 244);
+		scrollPane.setBounds(10, 380, 1012, 208);
 		jPanleQuanLySach.add(scrollPane);
 		
 		table = new JTable();
@@ -152,43 +159,48 @@ public class QuanLyThuVienView extends JFrame {
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_5.setBounds(10, 657, 1012, 87);
+		panel_5.setBounds(10, 635, 1012, 87);
 		jPanleQuanLySach.add(panel_5);
 		panel_5.setLayout(null);
 		
 		JButton buttonThem = new JButton("Thêm");
-		buttonThem.setBounds(140, 28, 84, 29);
+		buttonThem.setBounds(74, 19, 105, 47);
 		panel_5.add(buttonThem);
+		buttonThem.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\add.png"));
 		buttonThem.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonThem.addActionListener(action);
 		
 		JButton buttonSua = new JButton("Cập Nhật");
-		buttonSua.setBounds(485, 28, 112, 29);
+		buttonSua.setBounds(453, 19, 137, 47);
 		panel_5.add(buttonSua);
+		buttonSua.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\update.png"));
 		buttonSua.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonSua.addActionListener(action);
 		
 		JButton buttonXoa = new JButton("Xóa");
-		buttonXoa.setBounds(663, 28, 66, 29);
+		buttonXoa.setBounds(666, 19, 94, 47);
 		panel_5.add(buttonXoa);
+		buttonXoa.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\remove.png"));
 		buttonXoa.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonXoa.addActionListener(action);
 		
 		JButton btnLuu = new JButton("Lưu");
 		btnLuu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnLuu.setBounds(301, 28, 106, 29);
+		btnLuu.setBounds(262, 19, 94, 47);
 		btnLuu.addActionListener(action);
+		btnLuu.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\save.png"));
 		panel_5.add(btnLuu);
 		
 		JButton buttonLamMoi = new JButton("Làm Mới");
 		buttonLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonLamMoi.setBounds(824, 28, 112, 29);
+		buttonLamMoi.setBounds(836, 19, 127, 47);
 		panel_5.add(buttonLamMoi);
+		buttonLamMoi.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\update (2).png"));
 		buttonLamMoi.addActionListener(action);
 		
 		JLabel lblNewLabel_3 = new JLabel("Chức Năng");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_3.setBounds(10, 634, 70, 17);
+		lblNewLabel_3.setBounds(10, 608, 70, 17);
 		jPanleQuanLySach.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Thông Tin Sách");
@@ -215,8 +227,9 @@ public class QuanLyThuVienView extends JFrame {
 		
 		JButton buttonTimKiem = new JButton("Tìm Kiếm");
 		buttonTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonTimKiem.setBounds(829, 190, 115, 29);
+		buttonTimKiem.setBounds(829, 190, 134, 39);
 		buttonTimKiem.addActionListener(action);
+		buttonTimKiem.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\search.png"));
 		panel_6.add(buttonTimKiem);
 		
 		textFieldGiaTien = new JTextField();
@@ -309,8 +322,9 @@ public class QuanLyThuVienView extends JFrame {
 		
 		JButton buttonHuyTim = new JButton("Hủy Tìm");
 		buttonHuyTim.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonHuyTim.setBounds(829, 229, 115, 29);
+		buttonHuyTim.setBounds(829, 247, 134, 39);
 		panel_6.add(buttonHuyTim);
+		buttonHuyTim.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\cancle search.png"));
 		buttonHuyTim.addActionListener(action);
 		
 		JPanel panel = new JPanel();
@@ -338,14 +352,16 @@ public class QuanLyThuVienView extends JFrame {
 		
 		JButton buttonTimKiem1 = new JButton("Tìm Kiếm");
 		buttonTimKiem1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonTimKiem1.setBounds(828, 15, 117, 37);
+		buttonTimKiem1.setBounds(828, 15, 130, 37);
+		buttonTimKiem1.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\search.png"));
 		buttonTimKiem1.addActionListener(action1);
 		panel_1.add(buttonTimKiem1);
 		
 		JButton buttonHuyTim1 = new JButton("Hủy Tìm");
 		buttonHuyTim1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonHuyTim1.setBounds(828, 62, 117, 37);
+		buttonHuyTim1.setBounds(828, 62, 130, 37);
 		buttonHuyTim1.addActionListener(action1);
+		buttonHuyTim1.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\cancle search.png"));
 		panel_1.add(buttonHuyTim1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Tìm Kiếm Theo Mã Sinh Viên");
@@ -406,49 +422,55 @@ public class QuanLyThuVienView extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_4.setBounds(20, 682, 1007, 65);
+		panel_4.setBounds(20, 664, 1007, 65);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
 		JButton buttonMuonSach = new JButton("Mượn Sách");
 		buttonMuonSach.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonMuonSach.setBounds(41, 10, 121, 45);
+		buttonMuonSach.setBounds(21, 10, 143, 45);
 		buttonMuonSach.addActionListener(action1);
+		buttonMuonSach.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\borrow book.png"));
 		panel_4.add(buttonMuonSach);
 		
 		JButton buttonSuaThongTin = new JButton("Sửa Thông Tin");
 		buttonSuaThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonSuaThongTin.setBounds(374, 10, 143, 45);
+		buttonSuaThongTin.setBounds(374, 10, 170, 45);
 		buttonSuaThongTin.addActionListener(action1);
+		buttonSuaThongTin.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\fix.png"));
 		panel_4.add(buttonSuaThongTin);
 		
 		JButton buttonTraSach = new JButton("Trả Sách");
 		buttonTraSach.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonTraSach.setBounds(571, 10, 106, 45);
+		buttonTraSach.setBounds(571, 10, 134, 45);
 		buttonTraSach.addActionListener(action1);
+		buttonTraSach.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\return book.png"));
 		panel_4.add(buttonTraSach);
 		
 		JButton buttonXoaThongTin = new JButton("Xóa");
 		buttonXoaThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonXoaThongTin.setBounds(735, 10, 65, 45);
+		buttonXoaThongTin.setBounds(735, 10, 96, 45);
 		buttonXoaThongTin.addActionListener(action1);
+		buttonXoaThongTin.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\remove.png"));
 		panel_4.add(buttonXoaThongTin);
 		
 		JButton buttonLamMoiThongTin = new JButton("Làm Mới");
 		buttonLamMoiThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonLamMoiThongTin.setBounds(861, 10, 106, 45);
+		buttonLamMoiThongTin.setBounds(851, 10, 135, 45);
 		buttonLamMoiThongTin.addActionListener(action1);
+		buttonLamMoiThongTin.setIcon(new ImageIcon("C:\\\\Users\\\\luong\\\\eclipse-workspace\\\\BTLQuanLySinhVien\\\\image\\\\update (2).png"));
 		panel_4.add(buttonLamMoiThongTin);
 		
 		JButton buttonCapNhat = new JButton("Cập Nhật");
 		buttonCapNhat.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonCapNhat.setBounds(201, 12, 129, 45);
+		buttonCapNhat.setBounds(197, 10, 143, 45);
 		buttonCapNhat.addActionListener(action1);
+		buttonCapNhat.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\update.png"));
 		panel_4.add(buttonCapNhat);
 		
 		JLabel lblChcNng = new JLabel("Chức Năng");
 		lblChcNng.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblChcNng.setBounds(10, 664, 70, 17);
+		lblChcNng.setBounds(10, 640, 70, 17);
 		panel.add(lblChcNng);
 		
 		table_1 = new JTable();
@@ -461,7 +483,7 @@ public class QuanLyThuVienView extends JFrame {
 		));
 		
 		scrollPane_1 = new JScrollPane(table_1);
-		scrollPane_1.setBounds(20, 459, 1007, 182);
+		scrollPane_1.setBounds(20, 459, 1007, 166);
 		panel.add(scrollPane_1);
 		
 
@@ -666,6 +688,11 @@ public class QuanLyThuVienView extends JFrame {
 	    try {
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	        ngayXB = LocalDate.parse(this.textFieldNgayXuatBan.getText(), formatter);
+	        LocalDate now = LocalDate.now();
+	        if (ngayXB.isAfter(now)) {
+	            JOptionPane.showMessageDialog(this, "Ngày xuất bản không được lớn hơn ngày hiện tại.");
+	            return;
+	        }
 	    } catch (DateTimeParseException e) {
 	        JOptionPane.showMessageDialog(this, "Ngày xuất bản không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy.");
 	        return;
@@ -675,6 +702,10 @@ public class QuanLyThuVienView extends JFrame {
 	    
 	    try {
 	    	SoLuong = Integer.valueOf(this.textFieldSoLuong.getText());
+	    	if(SoLuong < 1) {
+	    		JOptionPane.showMessageDialog(this, "Số lượng nhập vào phải lớn hơn 0");
+	    		return;
+	    	}
 	    } catch (Exception e) {
 	        JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ.");
 	        return;
@@ -683,6 +714,10 @@ public class QuanLyThuVienView extends JFrame {
 	    double giaTien = 0;	
 	    try {
 	    	giaTien = Double.valueOf(this.textFieldGiaTien.getText());
+	    	if(giaTien < 1) {
+	    		JOptionPane.showMessageDialog(this, "Giá tiền nhập vào phải lớn hơn 0");
+	    		return;
+	    	}
 	    } catch (Exception e) {
 	        JOptionPane.showMessageDialog(this, "Giá tiền không hợp lệ.");
 	        return;
@@ -796,6 +831,7 @@ public class QuanLyThuVienView extends JFrame {
 	}
 	
 	public void thucHienMuonSach() {
+	    int i_row = table_1.getSelectedRow();
 	    // Kiểm tra nếu danh sách sách không rỗng
 	    if (QLSachModel.getDsSach() != null) {
 	        // Lấy thông tin từ các trường nhập vào
@@ -804,6 +840,10 @@ public class QuanLyThuVienView extends JFrame {
 	        int soLuongMuon = 0;
 	        try {
 	            soLuongMuon = Integer.parseInt(this.textFieldSoLuong1.getText());
+	            if (soLuongMuon < 1) {
+	                JOptionPane.showMessageDialog(this, "Số lượng nhập vào phải lớn hơn 0");
+	                return;
+	            }
 	        } catch (NumberFormatException e) {
 	            JOptionPane.showMessageDialog(this, "Số lượng mượn không hợp lệ.");
 	            return;
@@ -835,12 +875,17 @@ public class QuanLyThuVienView extends JFrame {
 
 	        // Tạo đối tượng MuonTraModel và thêm vào danh sách quản lý mượn trả
 	        MuonTraModel muonTra = new MuonTraModel(maSinhVien, maSach, soLuongMuon, ngayHenTra);
-	        themMuonTra(muonTra);
+	        String error = themMuonTra(muonTra); // Kiểm tra việc thêm mượn trả có thành công hay không
+
+	        if (error != null) {
+	            JOptionPane.showMessageDialog(this, error);
+	            return; // Dừng nếu việc thêm không thành công
+	        }
 
 	        // Cập nhật số lượng sách trong danh sách sách
 	        sachModel.setSoLuong(sachModel.getSoLuong() - soLuongMuon);
 	        QLSachModel.capNhatSach(sachModel);
-	        
+
 	        DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
 	        for (int i = 0; i < modelTable.getRowCount(); i++) {
 	            if (modelTable.getValueAt(i, 0).equals(maSach)) {
@@ -852,8 +897,6 @@ public class QuanLyThuVienView extends JFrame {
 	        JOptionPane.showMessageDialog(this, "Không có sách trong kho để mượn.");
 	    }
 	}
-
-
 	
 	public SachModel getThongTinSach(String maSach) {
 	    for (SachModel sach : QLSachModel.getDsSach()) {
@@ -866,12 +909,11 @@ public class QuanLyThuVienView extends JFrame {
 	
 
 
-	// Trong phương thức thêmMuonTra():
-	public void themMuonTra(MuonTraModel muonTra) {
+	public String themMuonTra(MuonTraModel muonTra) {
 	    DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
 	    boolean daTonTai = false;
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	    
+
 	    for (int i = 0; i < modelTable.getRowCount(); i++) {
 	        if (muonTra.getMaSinhVien().equals(modelTable.getValueAt(i, 0)) && muonTra.getMaSach().equals(modelTable.getValueAt(i, 1))) {
 	            daTonTai = true;
@@ -887,26 +929,26 @@ public class QuanLyThuVienView extends JFrame {
 
 	        // Kiểm tra nếu ngày hẹn trả nhỏ hơn ngày mượn
 	        if (muonTra.getNgayHenTra().isBefore(dateNow)) { // Sử dụng dateNow thay vì now
-	            JOptionPane.showMessageDialog(this, "Ngày hẹn trả không được nhỏ hơn ngày mượn.");
-	            return;
+	            return "Ngày hẹn trả không được nhỏ hơn ngày mượn.";
 	        }
 
 	        // Kiểm tra nếu ngày hẹn trả lớn hơn ngày trả
 	        LocalDate ngayHenTra = muonTra.getNgayHenTra();
 	        LocalDate ngayTraLocalDate = LocalDate.parse(ngayTra, formatter);
 	        if (ngayHenTra.isAfter(ngayTraLocalDate)) {
-	            JOptionPane.showMessageDialog(this, "Ngày hẹn trả không được lớn hơn ngày trả, thời hạn mượn sách là 14 ngày.");
-	            return;
+	            return "Ngày hẹn trả không được lớn hơn ngày trả, thời hạn mượn sách là 14 ngày.";
 	        }
-
 	        modelTable.addRow(new Object[]{muonTra.getMaSinhVien(), muonTra.getMaSach(), muonTra.getSoLuong(), ngayMuon, muonTra.getNgayHenTra().format(formatter), ngayTra, "Chưa trả"});
 	        if (!this.QLMuonTraModel.kiemTraTonTai(muonTra)) {
 	            this.QLMuonTraModel.insert(muonTra);
 	        }
 	        this.QLMuonTraModel.capNhatSoLuongSach(muonTra.getMaSach(), muonTra.getSoLuong());
-	        JOptionPane.showMessageDialog(this, "Thông tin mượn trả đã được thêm vào.");
+	        return null; // Trả về null nếu không có lỗi
+	    } else {
+	        return "Thông tin mượn trả đã tồn tại.";
 	    }
 	}
+	
 	
 	public MuonTraModel getThongTinMuonTraDangChon() {
 	    DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
@@ -972,6 +1014,10 @@ public class QuanLyThuVienView extends JFrame {
 	        int soLuongMuonMoi = 0;
 	        try {
 	            soLuongMuonMoi = Integer.parseInt(this.textFieldSoLuong1.getText());
+	            if(soLuongMuonMoi < 1) {
+		    		JOptionPane.showConfirmDialog(this, "Số lượng nhập vào phải lớn hơn 0");
+		    		return;
+		    	}
 	        } catch (NumberFormatException e) {
 	            JOptionPane.showMessageDialog(this, "Số lượng mượn không hợp lệ.");
 	            return;
@@ -1066,6 +1112,11 @@ public class QuanLyThuVienView extends JFrame {
 	}
 
 	public void thucHienTraSach() {
+		int i_row = table_1.getSelectedRow();
+	    if (i_row == -1) {
+	        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần trả sách.");
+	        return;
+	    }
 	    // Lấy thông tin mượn trả đang chọn
 	    MuonTraModel muonTraModel = getThongTinMuonTraDangChon();
 	    if (muonTraModel != null) {
