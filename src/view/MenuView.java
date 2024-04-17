@@ -63,7 +63,7 @@ public class MenuView extends JFrame {
     public MenuView() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setIconImage(logo.getImage());
-        setBounds(100, 100, 920, 313);
+        setBounds(100, 100, 920, 393);
         
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -92,38 +92,50 @@ public class MenuView extends JFrame {
         
         
         contentPane = new JPanel();
-        contentPane.setBackground(Color.LIGHT_GRAY);
+        contentPane.setBackground(Color.DARK_GRAY);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
         buttonDiem = new JButton("Quản lý điểm sinh viên");
-        buttonDiem.setBackground(SystemColor.activeCaption);
-        buttonDiem.setBounds(358, 94, 209, 97);
+        buttonDiem.setForeground(new Color(255, 255, 255));
+        buttonDiem.setBackground(new Color(0, 100, 0));
+        buttonDiem.setBounds(320, 190, 276, 69);
         contentPane.add(buttonDiem);
         buttonDiem.setFont(new Font("Tahoma", Font.PLAIN, 16));
         buttonDiem.addActionListener(action);
+        buttonDiem.setIcon(new ImageIcon("image\\QLDiemMenu.png"));
         
         buttonQLSV = new JButton("Quản lý thông tin sinh viên");
-        buttonQLSV.setBackground(SystemColor.activeCaption);
-        buttonQLSV.setBounds(55, 94, 228, 97);
+        buttonQLSV.setForeground(new Color(255, 255, 255));
+        buttonQLSV.setBackground(new Color(0, 100, 0));
+        buttonQLSV.setBounds(10, 190, 276, 69);
         contentPane.add(buttonQLSV);
         buttonQLSV.setFont(new Font("Tahoma", Font.PLAIN, 16));
         buttonQLSV.addActionListener(action);
+        buttonQLSV.setIcon(new ImageIcon("image\\QLSVMenu.png"));
         
         buttonThuVien = new JButton("Quản lý thư viện");
-        buttonThuVien.setBackground(SystemColor.activeCaption);
-        buttonThuVien.setBounds(631, 94, 221, 97);
+        buttonThuVien.setForeground(new Color(255, 255, 255));
+        buttonThuVien.setBackground(new Color(0, 100, 0));
+        buttonThuVien.setBounds(620, 190, 276, 69);
         contentPane.add(buttonThuVien);
         buttonThuVien.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        buttonThuVien.addActionListener(action);
+        buttonThuVien.setIcon(new ImageIcon("image\\QLSachMenu.png"));
         
-        JLabel lblNewLabel_2 = new JLabel("Chương trình quản lý sinh viên");
-        lblNewLabel_2.setForeground(Color.BLACK);
-        lblNewLabel_2.setBackground(Color.WHITE);
-        lblNewLabel_2.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        lblNewLabel_2.setBounds(283, 35, 359, 32);
-        contentPane.add(lblNewLabel_2);
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.RED);
+        panel.setBounds(224, 67, 437, 75);
+        contentPane.add(panel);
+        panel.setLayout(null);
+        
+        JLabel lblNewLabel = new JLabel("QUẢN LÝ SINH VIÊN");
+        lblNewLabel.setForeground(new Color(255, 255, 255));
+        lblNewLabel.setBounds(103, 0, 324, 85);
+        panel.add(lblNewLabel);
+        lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        lblNewLabel.setIcon(new ImageIcon("image\\iconMenu.png"));
+        buttonThuVien.addActionListener(action);
 
         this.setLocationRelativeTo(null);
         this.setVisible(true);
