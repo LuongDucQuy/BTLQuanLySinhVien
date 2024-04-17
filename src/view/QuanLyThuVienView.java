@@ -111,17 +111,17 @@ public class QuanLyThuVienView extends JFrame {
 		
 		JMenu jMenuHeThong = new JMenu("Hệ Thống");
 		menuBar.add(jMenuHeThong);
-		jMenuHeThong.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\menuSelect.png"));
+		jMenuHeThong.setIcon(new ImageIcon("image\\menuSelect.png"));
 		jMenuHeThong.addActionListener(action);
 		
 		JMenuItem jMenuDong = new JMenuItem("Đóng");
 		jMenuHeThong.add(jMenuDong);
-		jMenuDong.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\menuLogOut.png"));
+		jMenuDong.setIcon(new ImageIcon("image\\menuLogOut.png"));
 		jMenuDong.addActionListener(action);
 		
 		JMenuItem jMenuThoat = new JMenuItem("Thoát");
 		jMenuHeThong.add(jMenuThoat);
-		jMenuThoat.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\menuExit.png"));
+		jMenuThoat.setIcon(new ImageIcon("image\\menuExit.png"));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		jMenuThoat.addActionListener(action);
@@ -166,21 +166,21 @@ public class QuanLyThuVienView extends JFrame {
 		JButton buttonThem = new JButton("Thêm");
 		buttonThem.setBounds(74, 19, 105, 47);
 		panel_5.add(buttonThem);
-		buttonThem.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\add.png"));
+		buttonThem.setIcon(new ImageIcon("image\\add.png"));
 		buttonThem.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonThem.addActionListener(action);
 		
 		JButton buttonSua = new JButton("Cập Nhật");
 		buttonSua.setBounds(453, 19, 137, 47);
 		panel_5.add(buttonSua);
-		buttonSua.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\update.png"));
+		buttonSua.setIcon(new ImageIcon("image\\update.png"));
 		buttonSua.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonSua.addActionListener(action);
 		
 		JButton buttonXoa = new JButton("Xóa");
 		buttonXoa.setBounds(666, 19, 94, 47);
 		panel_5.add(buttonXoa);
-		buttonXoa.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\remove.png"));
+		buttonXoa.setIcon(new ImageIcon("image\\remove.png"));
 		buttonXoa.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonXoa.addActionListener(action);
 		
@@ -188,14 +188,14 @@ public class QuanLyThuVienView extends JFrame {
 		btnLuu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnLuu.setBounds(262, 19, 94, 47);
 		btnLuu.addActionListener(action);
-		btnLuu.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\save.png"));
+		btnLuu.setIcon(new ImageIcon("image\\save.png"));
 		panel_5.add(btnLuu);
 		
 		JButton buttonLamMoi = new JButton("Làm Mới");
 		buttonLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonLamMoi.setBounds(836, 19, 127, 47);
 		panel_5.add(buttonLamMoi);
-		buttonLamMoi.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\update (2).png"));
+		buttonLamMoi.setIcon(new ImageIcon("image\\update (2).png"));
 		buttonLamMoi.addActionListener(action);
 		
 		JLabel lblNewLabel_3 = new JLabel("Chức Năng");
@@ -229,7 +229,7 @@ public class QuanLyThuVienView extends JFrame {
 		buttonTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonTimKiem.setBounds(829, 190, 134, 39);
 		buttonTimKiem.addActionListener(action);
-		buttonTimKiem.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\search.png"));
+		buttonTimKiem.setIcon(new ImageIcon("image\\search.png"));
 		panel_6.add(buttonTimKiem);
 		
 		textFieldGiaTien = new JTextField();
@@ -324,7 +324,7 @@ public class QuanLyThuVienView extends JFrame {
 		buttonHuyTim.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonHuyTim.setBounds(829, 247, 134, 39);
 		panel_6.add(buttonHuyTim);
-		buttonHuyTim.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\cancle search.png"));
+		buttonHuyTim.setIcon(new ImageIcon("image\\cancle search.png"));
 		buttonHuyTim.addActionListener(action);
 		
 		JPanel panel = new JPanel();
@@ -353,7 +353,7 @@ public class QuanLyThuVienView extends JFrame {
 		JButton buttonTimKiem1 = new JButton("Tìm Kiếm");
 		buttonTimKiem1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonTimKiem1.setBounds(828, 15, 130, 37);
-		buttonTimKiem1.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\search.png"));
+		buttonTimKiem1.setIcon(new ImageIcon("image\\search.png"));
 		buttonTimKiem1.addActionListener(action1);
 		panel_1.add(buttonTimKiem1);
 		
@@ -361,7 +361,7 @@ public class QuanLyThuVienView extends JFrame {
 		buttonHuyTim1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonHuyTim1.setBounds(828, 62, 130, 37);
 		buttonHuyTim1.addActionListener(action1);
-		buttonHuyTim1.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\cancle search.png"));
+		buttonHuyTim1.setIcon(new ImageIcon("image\\cancle search.png"));
 		panel_1.add(buttonHuyTim1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Tìm Kiếm Theo Mã Sinh Viên");
@@ -430,42 +430,42 @@ public class QuanLyThuVienView extends JFrame {
 		buttonMuonSach.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonMuonSach.setBounds(21, 10, 143, 45);
 		buttonMuonSach.addActionListener(action1);
-		buttonMuonSach.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\borrow book.png"));
+		buttonMuonSach.setIcon(new ImageIcon("image\\borrow book.png"));
 		panel_4.add(buttonMuonSach);
 		
 		JButton buttonSuaThongTin = new JButton("Sửa Thông Tin");
 		buttonSuaThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonSuaThongTin.setBounds(374, 10, 170, 45);
 		buttonSuaThongTin.addActionListener(action1);
-		buttonSuaThongTin.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\fix.png"));
+		buttonSuaThongTin.setIcon(new ImageIcon("image\\fix.png"));
 		panel_4.add(buttonSuaThongTin);
 		
 		JButton buttonTraSach = new JButton("Trả Sách");
 		buttonTraSach.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonTraSach.setBounds(571, 10, 134, 45);
 		buttonTraSach.addActionListener(action1);
-		buttonTraSach.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\return book.png"));
+		buttonTraSach.setIcon(new ImageIcon("image\\return book.png"));
 		panel_4.add(buttonTraSach);
 		
 		JButton buttonXoaThongTin = new JButton("Xóa");
 		buttonXoaThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonXoaThongTin.setBounds(735, 10, 96, 45);
 		buttonXoaThongTin.addActionListener(action1);
-		buttonXoaThongTin.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\remove.png"));
+		buttonXoaThongTin.setIcon(new ImageIcon("image\\remove.png"));
 		panel_4.add(buttonXoaThongTin);
 		
 		JButton buttonLamMoiThongTin = new JButton("Làm Mới");
 		buttonLamMoiThongTin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonLamMoiThongTin.setBounds(851, 10, 135, 45);
 		buttonLamMoiThongTin.addActionListener(action1);
-		buttonLamMoiThongTin.setIcon(new ImageIcon("C:\\\\Users\\\\luong\\\\eclipse-workspace\\\\BTLQuanLySinhVien\\\\image\\\\update (2).png"));
+		buttonLamMoiThongTin.setIcon(new ImageIcon("image\\\\update (2).png"));
 		panel_4.add(buttonLamMoiThongTin);
 		
 		JButton buttonCapNhat = new JButton("Cập Nhật");
 		buttonCapNhat.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonCapNhat.setBounds(197, 10, 143, 45);
 		buttonCapNhat.addActionListener(action1);
-		buttonCapNhat.setIcon(new ImageIcon("C:\\Users\\luong\\eclipse-workspace\\BTLQuanLySinhVien\\image\\update.png"));
+		buttonCapNhat.setIcon(new ImageIcon("image\\update.png"));
 		panel_4.add(buttonCapNhat);
 		
 		JLabel lblChcNng = new JLabel("Chức Năng");
